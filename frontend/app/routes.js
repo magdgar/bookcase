@@ -25,6 +25,9 @@ module.exports = function(app, passport) {
 // =============================================================================
 
     // locally --------------------------------
+        app.get('/modal', function(req, res) {
+            res.render('modal.ejs', { message: req.flash('loginMessage') });
+        });
         // LOGIN ===============================
         // show the login form
         app.get('/login', function(req, res) {
