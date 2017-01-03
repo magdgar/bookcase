@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask.ext.restplus import abort
 
 app = Flask(__name__)
 users = []
@@ -10,21 +11,22 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/add_user/', methods=['POST'])
+@app.route('/user', methods=['POST'])
 def add_user():
+    if not request.json:
+        abort(400)
+
     user = {
-        'id': users.__len__() + 1,
-        'name': request.json.get('name', ""),
-        'email': request.json.get('email', "")
+        'name': request.json['name'],
+        'email': request.json['email']
     }
     users.append(user)
     return str(user)
 
 
-@app.route('/users/')
+@app.route('/users', methods=['GET'])
 def hello():
     return str(users)
-
 
 if __name__ == '__main__':
     app.run()
