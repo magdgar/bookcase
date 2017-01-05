@@ -6,6 +6,11 @@ app = Flask(__name__)
 users = []
 
 
+@app.route('/book', methods=['GET'])
+def get_book():
+    return jsonify({"book": "boook"})
+
+
 @app.route('/')
 def hello_world():
     return 'Hello World!'
@@ -27,6 +32,7 @@ def add_user():
     user = {
         'id': users.__len__() + 1,
         'name': request.json['name'],
+        'surname': request.json['surname'],
         'email': request.json['email']
     }
     users.append(user)
