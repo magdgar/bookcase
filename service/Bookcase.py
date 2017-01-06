@@ -2,13 +2,10 @@ from flask import Flask, jsonify
 from flask import request
 from flask.ext.restplus import abort
 
+from service.Books import simple_page
+
 app = Flask(__name__)
 users = []
-
-
-@app.route('/book', methods=['GET'])
-def get_book():
-    return jsonify({"book": "boook"})
 
 
 @app.route('/')
@@ -45,4 +42,5 @@ def hello():
 
 
 if __name__ == '__main__':
+    app.register_blueprint(simple_page)
     app.run()
