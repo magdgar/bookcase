@@ -6,14 +6,18 @@ from flask.ext.pymongo import PyMongo
 from service.Books import simple_page
 
 app = Flask(__name__)
-mongo = PyMongo(app)
 users = []
+
+app.config['HOST'] = 'localhost'
+app.config['PORT'] = 27017
+app.config['DBNAME'] = 'bookcase'
+mongo = PyMongo(app)
 
 
 @app.route('/online_users')
 def home_page():
-    online_users = mongo.db.users.find({'online': True})
-    return render_template('index.html', online_users=online_users)
+    online_users = mongo.db.users.find({'active': True})
+    render_template('index.html', online_users=online_users)
 
 
 @app.route('/')
