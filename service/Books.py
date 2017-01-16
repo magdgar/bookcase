@@ -20,7 +20,12 @@ def add_book():
         'id': books.__len__() + 1,
         'author': request.json['author'],
         'title': request.json['title'],
-        'publication_date': request.json.get('publication_date')
+        'original title': request.json.get('original title'),
+        'genre': request.json.get('genre'),
+        'publication_date': request.json.get('publication_date'),
+        'IBN': request.json.get('IBN'),
+        'translator': request.json.get('translator'),
+        'language': request.json.get('language')
     }
     books.append(book)
     return jsonify({"book": book})
