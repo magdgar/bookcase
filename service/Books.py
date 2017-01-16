@@ -6,9 +6,13 @@ simple_page = Blueprint('simple_page', __name__, template_folder='templates')
 books = []
 
 
-@simple_page.route('/book', methods=['GET'])
-def get_book():
-    return jsonify({"book": "boook"})
+@simple_page.route('/book/<int:book_id>', methods=['GET'])
+def get_book(book_id):
+    book = [book for book in books if book['id'] == book_id]
+
+    if len(book) == 0:
+        abort(404)
+    return jsonify({"book": book[0]})
 
 
 @simple_page.route('/add_book', methods=['POST'])
