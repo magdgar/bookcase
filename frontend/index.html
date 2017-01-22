@@ -109,18 +109,22 @@
             },
 
             render: function() {
+                var errors = this.props.contact.errors || {};
+
                 return (
                     React.createElement('form', {
                         onSubmit: this.onSubmit,
                         className: 'ContactForm', noValidate: true}, 
                         React.createElement('input', {
-                            type: 'tekst', 
+                            type: 'tekst',
+                            className: errors.name && 'ContactForm-errors', 
                             placeholder: 'Name (reqiured)', 
                             value: this.props.contact.name,
                             onChange: this.onNameChange,
                         }),
                         React.createElement('input', {
                             type: 'email',
+                            className: errors.email && 'ContactForm-errors',
                             placeholder: 'Email',
                             value: this.props.contact.email,
                             onChange: this.onEmailChange,
@@ -170,14 +174,20 @@
         function submitContact() {
             var contact = Object.assign({}, state.newContact, {key: state.contacts.length + 1, errors: {}});
 
-            if( contact.name && contact.email) {
-                setState(
-                    Object.keys(contact.errors).length === 0 ? {
-                        newContact: Object.assign({}, CONTACT_TEMPLATE),
-                        contacts: state.contacts.slice(0).concat(contact),
-                    } : { newContact: contact }
-                    );
+            if(!contact.name) {
+                contact.errors.name = ["Please enter your new contact's name"];
             }
+
+            if (!/.+@.+\..+/.test(contact.email)) {
+                contact.errors.email = ["Please enter your new contact's email"];
+            }
+
+            setState(
+                Object.keys(contact.errors).length === 0 ? {
+                    newContact: Object.assign({}, CONTACT_TEMPLATE),
+                    contacts: state.contacts.slice(0).concat(contact),
+                } : {newContact: contact}
+                );
         }
 
         var state = {}
