@@ -132,25 +132,44 @@ function submitContact() {
     );
 }
 
-var state = {}
-
-function setState(changes) {
-    Object.assign(state, changes);
-
-    ReactDOM.render(
-        React.createElement(ContactView, Object.assign({}, state, {
-            onContactChange: updateContact,
-            onContactSubmit: submitContact,
-        })),
-        document.getElementById('react-app')
-    );
+function navigated() {
+  setState({location: window.location.hash});
 }
 
-setState({
-    contacts: [
-        {key: 1, name: "James K Nelson", email: "james@jameskelelson.com", description: "Front-end Unicorn"},
-        {key: 2, name: "Jim", email: "jim@example.com"},
-        {key: 3, name: "Joe"}
-    ],
-    newContact: Object.assign({}, CONTACT_TEMPLATE),
-});
+var state = {
+  contacts: [
+    {key: '1', name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
+    {key: '2', name: "Jim", email: "jim@example.com"},
+  ],
+  newContact: Object.assign({}, CONTACT_TEMPLATE),
+  location: window.location.hash
+};
+
+
+function setState(changes) {
+  var component;
+
+  Object.assign(state, changes);
+
+  switch (state.location) {
+    case '#/contacts':
+      component = React.createElement(ContactsView, Object.assign({}, state, {
+        onChangeContact: updateNewContact,
+        onSubmitContact: submitNewContact,
+      }));
+      break;
+    default:
+      component = React.createElement('div', {},
+        React.createElement('h1', {}, "Not Found"),
+        React.createElement('a', {href: '#/contacts'}, "Contacts")
+      );
+  }
+
+  ReactDOM.render(component, document.getElementById('react-app'));
+}
+
+// Handle browser navigation events
+window.addEventListener('hashchange', navigated, false);
+
+// Start the app
+navigated();
