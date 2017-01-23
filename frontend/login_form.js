@@ -53,14 +53,14 @@ var ContactForm = React.createClass({
                 },
                 React.createElement('input', {
                     type: 'tekst',
-                    className: errors.name && 'ContactForm-errors',
+                    className: errors.name && 'ContactForm-error',
                     placeholder: 'Name (reqiured)',
                     value: this.props.contact.name,
                     onChange: this.onNameChange,
                 }),
                 React.createElement('input', {
                     type: 'email',
-                    className: errors.email && 'ContactForm-errors',
+                    className: errors.email && 'ContactForm-error',
                     placeholder: 'Email (reqiured)',
                     value: this.props.contact.email,
                     onChange: this.onEmailChange,
@@ -98,7 +98,8 @@ var ContactView = React.createClass({
                 React.createElement('h1', {className: 'ContactView-title'}, "Contacts"),
                 React.createElement('u1', {className: 'ContactView-list'}, contactItemElements),
                 React.createElement(ContactForm, {
-                    contact: this.props.newContact, onChange: this.props.onContactChange,
+                    contact: this.props.newContact,
+                    onChange: this.props.onContactChange,
                     onSubmit: this.props.onContactSubmit,
                 })
             )

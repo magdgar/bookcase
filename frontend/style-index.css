@@ -42,7 +42,6 @@ body {
 .ContactForm {
     padding: 8px 24px;
 }
-
 .ContactForm > input,
 .ContactForm > textarea {
     display: block;
@@ -52,4 +51,7 @@ body {
     border-radius: 3px;
     border: 1px solid #888;
     font-size: 14px
+}
+.ContactForm > input.ContactForm-error {
+    border: 2px solid #b30104;
 }
