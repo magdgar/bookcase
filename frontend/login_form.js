@@ -153,9 +153,9 @@ function setState(changes) {
 
   switch (state.location) {
     case '#/contacts':
-      component = React.createElement(ContactsView, Object.assign({}, state, {
-        onChangeContact: updateNewContact,
-        onSubmitContact: submitNewContact,
+      component = React.createElement(ContactView, Object.assign({}, state, {
+        onChangeContact: updateContact,
+        onSubmitContact: submitContact
       }));
       break;
     default:
