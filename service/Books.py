@@ -22,7 +22,7 @@ def add_book():
 
     book = {
         'id': books.__len__() + 1,
-        'author': request.json['author'],
+        'author_id': request.json['author_id'],
         'title': request.json['title'],
         'original title': request.json.get('original title'),
         'genre': request.json.get('genre'),
