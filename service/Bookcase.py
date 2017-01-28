@@ -55,4 +55,5 @@ def hello():
 
 if __name__ == '__main__':
     app.register_blueprint(simple_page)
+    app.register_blueprint(reading_info)
     app.run()
