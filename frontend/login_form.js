@@ -137,35 +137,27 @@ function navigated() {
 }
 
 var state = {
+    transitioning: false,
+    location: null,
   contacts: [
     {key: '1', name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
-    {key: '2', name: "Jim", email: "jim@example.com"},
+    {key: '2', name: "Jim", email: "jim@example.com"}
   ],
-  newContact: Object.assign({}, CONTACT_TEMPLATE),
-  location: window.location.hash
+    contactForms: {},
+  newContact: Object.assign({}, CONTACT_TEMPLATE)
 };
 
 
 function setState(changes) {
-  var component;
 
   Object.assign(state, changes);
 
-  switch (state.location) {
-    case '#/contacts':
-      component = React.createElement(ContactView, Object.assign({}, state, {
-        onChangeContact: updateContact,
-        onSubmitContact: submitContact
-      }));
-      break;
-    default:
-      component = React.createElement('div', {},
-        React.createElement('h1', {}, "Not Found"),
-        React.createElement('a', {href: '#/contacts'}, "Contacts")
+  if(!state.transitioning) {
+      ReactDOM.render(
+          React.createElement(Application, state),
+          document.getElementById(('react-app'))
       );
-  }
-
-  ReactDOM.render(component, document.getElementById('react-app'));
+     }
 }
 
 // Handle browser navigation events
