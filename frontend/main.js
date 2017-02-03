@@ -11,7 +11,7 @@ var state = {
   transitioning: false,
   location: null,
   contacts: [
-    {key: '1', name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
+    {key: '1', name: "Kotek", email: "james@example.com", description: "Front-end Unicorn"},
     {key: '2', name: "Jim", email: "jim@example.com"},
   ],
   contactForms: {},
@@ -22,7 +22,7 @@ var state = {
 function setState(changes) {
   Object.assign(state, changes);
 
- if (!state.transitioning) {
+  if (!state.transitioning) {
     ReactDOM.render(
       React.createElement(Application, state),
       document.getElementById('react-app')

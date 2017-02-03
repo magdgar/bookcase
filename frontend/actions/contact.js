@@ -7,31 +7,32 @@ function _addValidationToContact(contact) {
   }
 }
 
+
 function updateNewContact(contact) {
   setState({ newContactForm: contact });
 }
 
 
 function submitNewContact() {
-    var contact = Object.assign({}, state.newContactForm, {key: (state.contacts.length + 1) + '', errors: {}});
+  var contact = Object.assign({}, state.newContactForm, {key: (state.contacts.length + 1) + '', errors: {}});
+  
+  _addValidationToContact(contact);
 
-    _addValidationToContact(contact);
-
-    setState(
-        Object.keys(contact.errors).length === 0
-        ? {
-            newContactForm: Object.assign({}, CONTACT_TEMPLATE),
-            contacts: state.contacts.slice(0).concat(contact),
-        }
-        : {newContactForm: contact}
-    )
+  setState(
+    Object.keys(contact.errors).length === 0
+    ? {
+        newContactForm: Object.assign({}, CONTACT_TEMPLATE),
+        contacts: state.contacts.slice(0).concat(contact),
+      }
+    : { newContactForm: contact }
+  )
 }
 
 
 function updateContactForm(contact) {
-    var update = {};
-    update[contact.key] = contact;
-     var contactForms = Object.assign(state.contactForms, update);
+  var update = {};
+  update[contact.key] = contact;
+  var contactForms = Object.assign(state.contactForms, update);
 
   setState({ contactForms: contactForms });
 }
@@ -51,7 +52,7 @@ function submitContactForm() {
 
     var contactForms = Object.assign({}, state.contactForms);
     var update = { contactForms: contactForms };
-
+    
     if (Object.keys(contact.errors).length === 0) {
       delete contactForms[key];
       update.contacts = state.contacts.slice(0).map(function(x) {
@@ -65,5 +66,5 @@ function submitContactForm() {
     }
 
     setState(update);
-  }
+  }  
 }
