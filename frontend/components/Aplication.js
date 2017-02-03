@@ -14,16 +14,16 @@ var Application = React.createClass({
                     }))
                 } else {
                     return React.createElement(ContactView, Object.assign({}, this.props, {
-                        onChangeContact: updateContact,
-                        onSubmitContact: submitContact(),
+                        onChangeContact: updateNewContact,
+                        onSubmitContact: submitNewContact,
                     }));
                 }
                 break;
             default:
                 return React.createElement('div', {},
                     React.createElement('h1', {}, "Not Found"),
-                    React.createElement('a', {href: '#/contacts'}, "contacts")
+                    React.createElement('a', {href: '#/contacts'}, "Contacts")
                 );
         }
-    }
+    },
 });

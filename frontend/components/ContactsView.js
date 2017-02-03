@@ -1,7 +1,7 @@
 var ContactsView = React.createClass({
   propTypes: {
-    onContactChange: React.PropTypes.func.isRequired,
-    onContactSubmit: React.PropTypes.func.isRequired,
+    onChangeContact: React.PropTypes.func.isRequired,
+    onSubmitContact: React.PropTypes.func.isRequired,
 
     contacts: React.PropTypes.array.isRequired,
     newContactForm: React.PropTypes.object.isRequired,
@@ -17,8 +17,8 @@ var ContactsView = React.createClass({
           })),
         React.createElement(ContactForm, {
           value: this.props.newContactForm,
-          onChange: this.props.onContactChange,
-          onSubmit: this.props.onContactSubmit,
+          onChange: this.props.onChangeContact,
+          onSubmit: this.props.onSubmitContact,
         })
       )
     )

@@ -18,7 +18,7 @@ var ContactForm = React.createClass({
     },
 
     onSubmit: function(e) {
-        e.preventDefault()
+        e.preventDefault(),
         this.props.onSubmit()
     },
 
@@ -26,12 +26,9 @@ var ContactForm = React.createClass({
         var errors = this.props.contact.errors || {};
 
         return (
-            React.createElement('form', {
-                    onSubmit: this.onSubmit,
-                    className: 'ContactForm', noValidate: true
-                },
+            React.createElement('form', {onSubmit: this.onSubmit, className: 'ContactForm', noValidate: true},
                 React.createElement('input', {
-                    type: 'tekst',
+                    type: 'text',
                     className: errors.name && 'ContactForm-error',
                     placeholder: 'Name (reqiured)',
                     onChange: this.onNameInput,

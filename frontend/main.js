@@ -22,7 +22,7 @@ var state = {
 function setState(changes) {
   Object.assign(state, changes);
 
-  if (!state.transitioning) {
+ if (!state.transitioning) {
     ReactDOM.render(
       React.createElement(Application, state),
       document.getElementById('react-app')
