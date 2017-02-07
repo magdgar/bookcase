@@ -2,11 +2,11 @@ from os import abort
 
 from flask import Blueprint, jsonify, request
 
-simple_page = Blueprint('reading_info', __name__, template_folder='templates')
+reading_info = Blueprint('reading_info', __name__, template_folder='templates')
 reading_informations = []
 
 
-@simple_page.route('/add_reading_info', methods=['POST'])
+@reading_info.route('/add_reading_info', methods=['POST'])
 def add_info():
     if not request.json:
         abort(400)

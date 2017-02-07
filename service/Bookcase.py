@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, render_template
 from flask import request
 from flask.ext.restplus import abort
-from flask.ext.pymongo import PyMongo
 
 from service.Books import simple_page
+from service.BookReadingInfo import reading_info
 
 app = Flask(__name__)
 users = []
@@ -11,13 +11,11 @@ users = []
 app.config['HOST'] = 'localhost'
 app.config['PORT'] = 27017
 app.config['DBNAME'] = 'bookcase'
-mongo = PyMongo(app)
 
 
 @app.route('/online_users')
 def home_page():
-    online_users = mongo.db.users.find({'active': True})
-    render_template('index.html', online_users=online_users)
+    render_template('index.html', online_users=[])
 
 
 @app.route('/')
