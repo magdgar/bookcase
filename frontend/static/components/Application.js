@@ -20,11 +20,27 @@ var Application = React.createClass({
           }));
         }
         break;
+      case 'xcontacts':
+        if (this.props.location[1]) {
+          return React.createElement(XContactView, Object.assign({}, this.props, {
+            id: this.props.location[1],
+            onChangeContact: updateContactForm,
+            onSubmitContact: submitContactForm,
+          }))
+        }
+        else {
+          return React.createElement(XContactsView, Object.assign({}, this.props, {
+            onChangeContact: updateNewContact,
+            onSubmitContact: submitNewContact,
+          }));
+        }
+        break;
 
       default:
         return React.createElement('div', {}, 
           React.createElement('h1', {}, "Not Found"),
-          React.createElement('a', {href: '#/contacts'}, "Contacts")
+          React.createElement('a', {href: '#/contacts'}, "Contacts"),
+          React.createElement('a', {href: '#/xcontacts'}, "XContacts")
         );
     }
   },

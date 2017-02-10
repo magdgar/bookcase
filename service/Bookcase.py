@@ -40,6 +40,7 @@ def add_user():
         'id': users.__len__() + 1,
         'name': request.json['name'],
         'surname': request.json['surname'],
+        'login': request.json['login'],
         'email': request.json['email']
     }
     users.append(user)
