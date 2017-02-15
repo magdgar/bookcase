@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, render_template
 from flask import request
 from flask.ext.restplus import abort
+from flask.ext.sqlalchemy import SQLAlchemy
+import os
 
 from service.Books import simple_page
 from service.BookReadingInfo import reading_info
@@ -11,6 +13,10 @@ users = []
 app.config['HOST'] = 'localhost'
 app.config['PORT'] = 27017
 app.config['DBNAME'] = 'bookcase'
+
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 
 @app.route('/online_users')
